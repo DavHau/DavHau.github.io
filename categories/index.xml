@@ -2,9 +2,9 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on DavHau - David Hauer</title>
-    <link>/categories/</link>
+    <link>https://DavHau.github.io/dump/categories/</link>
     <description>Recent content in Categories on DavHau - David Hauer</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://DavHau.github.io/dump/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

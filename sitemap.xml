@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/</loc>
+    <loc>https://DavHau.github.io/dump/</loc>
     <lastmod>2023-02-22T18:44:15+07:00</lastmod>
   </url><url>
-    <loc>/projects/drv-parts/</loc>
+    <loc>https://DavHau.github.io/dump/projects/drv-parts/</loc>
     <lastmod>2023-02-22T18:44:15+07:00</lastmod>
   </url><url>
-    <loc>/projects/</loc>
+    <loc>https://DavHau.github.io/dump/projects/</loc>
     <lastmod>2023-02-22T18:44:15+07:00</lastmod>
   </url><url>
-    <loc>/authors/</loc>
+    <loc>https://DavHau.github.io/dump/authors/</loc>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>https://DavHau.github.io/dump/categories/</loc>
   </url><url>
-    <loc>/series/</loc>
+    <loc>https://DavHau.github.io/dump/series/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>https://DavHau.github.io/dump/tags/</loc>
   </url>
 </urlset>
