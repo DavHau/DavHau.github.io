@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+  drv-parts · DavHau - David Hauer
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="David Hauer">
+<meta name="description" content="drv-parts Link to heading drv-parts replaces callPackage, override, overrideAttrs, ... as a mechanism for configuring packages.
+It makes package configuration feel like nixos system configuration.
+Benefits Link to heading No more override functions Link to heading Changing options of packages in nixpkgs can require chaining different override functions like this:
+{ htop-mod = let htop-overridden = pkgs.htop.overrideAttrs (old: { pname = &#34;htop-mod&#34;; }); in htop-overridden.override (old: { sensorsSupport = false; }); } &hellip; while doing the same using drv-parts looks like this:">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="drv-parts"/>
+<meta name="twitter:description" content="drv-parts Link to heading drv-parts replaces callPackage, override, overrideAttrs, ... as a mechanism for configuring packages.
+It makes package configuration feel like nixos system configuration.
+Benefits Link to heading No more override functions Link to heading Changing options of packages in nixpkgs can require chaining different override functions like this:
+{ htop-mod = let htop-overridden = pkgs.htop.overrideAttrs (old: { pname = &#34;htop-mod&#34;; }); in htop-overridden.override (old: { sensorsSupport = false; }); } &hellip; while doing the same using drv-parts looks like this:"/>
+
+<meta property="og:title" content="drv-parts" />
+<meta property="og:description" content="drv-parts Link to heading drv-parts replaces callPackage, override, overrideAttrs, ... as a mechanism for configuring packages.
+It makes package configuration feel like nixos system configuration.
+Benefits Link to heading No more override functions Link to heading Changing options of packages in nixpkgs can require chaining different override functions like this:
+{ htop-mod = let htop-overridden = pkgs.htop.overrideAttrs (old: { pname = &#34;htop-mod&#34;; }); in htop-overridden.override (old: { sensorsSupport = false; }); } &hellip; while doing the same using drv-parts looks like this:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/projects/drv-parts/" /><meta property="article:section" content="projects" />
+<meta property="article:published_time" content="2023-02-22T18:44:15+07:00" />
+<meta property="article:modified_time" content="2023-02-22T18:44:15+07:00" />
+
+
+
+
+<link rel="canonical" href="/projects/drv-parts/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.0fa2dc75ed1b76894ac0e062b10a6c4730daa745096fa120114b290ed8a48788.css" integrity="sha256-D6Lcde0bdolKwOBisQpsRzDap0UJb6EgEUspDtikh4g=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.593028e7f7ac55c003b79c230d1cd411bb4ca53b31556c3abb7f027170e646e9.css" integrity="sha256-WTAo5/esVcADt5wjDRzUEbtMpTsxVWw6u38CcXDmRuk=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<meta name="generator" content="Hugo 0.110.0">
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      DavHau - David Hauer
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="/projects/drv-parts/">
+          drv-parts
+        </a>
+      </h1>
+    </header>
+
+    <h1 id="drv-partshttpsgithubcomdavhaudrv-parts">
+  <a href="https://github.com/DavHau/drv-parts">drv-parts</a>
+  <a class="heading-link" href="#drv-partshttpsgithubcomdavhaudrv-parts">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<p><code>drv-parts</code> replaces <strong><code>callPackage</code></strong>, <strong><code>override</code></strong>, <strong><code>overrideAttrs</code></strong>, <strong><code>...</code></strong> as a mechanism for configuring packages.<br>
+It makes package configuration feel like nixos system configuration.</p>
+<h1 id="benefits">
+  Benefits
+  <a class="heading-link" href="#benefits">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<h2 id="no-more-override-functions">
+  No more override functions
+  <a class="heading-link" href="#no-more-override-functions">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Changing options of packages in nixpkgs can require chaining different override functions like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  htop-mod <span style="color:#f92672">=</span> <span style="color:#66d9ef">let</span>
+</span></span><span style="display:flex;"><span>    htop-overridden <span style="color:#f92672">=</span> pkgs<span style="color:#f92672">.</span>htop<span style="color:#f92672">.</span>overrideAttrs (old: {
+</span></span><span style="display:flex;"><span>      pname <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;htop-mod&#34;</span>;
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>    htop-overridden<span style="color:#f92672">.</span>override (old: {
+</span></span><span style="display:flex;"><span>      sensorsSupport <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&hellip; while doing the same using <code>drv-parts</code> looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  htop-mod <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    imports <span style="color:#f92672">=</span> [<span style="color:#e6db74">./htop.nix</span>];
+</span></span><span style="display:flex;"><span>    pname <span style="color:#f92672">=</span> lib<span style="color:#f92672">.</span>mkForce <span style="color:#e6db74">&#34;htop-mod&#34;</span>;
+</span></span><span style="display:flex;"><span>    sensorsSupport <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>See htop module definition <a href="/examples/flake-parts/htop/htop.nix">here</a>.</p>
+<h2 id="type-safety">
+  Type safety
+  <a class="heading-link" href="#type-safety">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The following code in nixpkgs mkDerivation mysteriously skips the patches:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>mkDerivation {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>  dontPatch <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;false&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&hellip; while doing the same using <code>drv-parts</code> raises an informative type error:</p>
+<pre tabindex="0"><code>A definition for option `[...].dontPatch&#39; is not of type `boolean&#39; [...]
+</code></pre><h2 id="catch-typos">
+  Catch typos
+  <a class="heading-link" href="#catch-typos">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The following code in nixpkgs mkDerivation builds <strong>without</strong> openssl_3.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>mkDerivation {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>  nativBuildInputs <span style="color:#f92672">=</span> [openssl_3];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>&hellip; while doing the same using <code>drv-parts</code> raises an informative error:</p>
+<pre tabindex="0"><code>The option `[...].nativBuildInputs&#39; does not exist
+</code></pre><h2 id="environment-variables-clearly-defined">
+  Environment variables clearly defined
+  <a class="heading-link" href="#environment-variables-clearly-defined">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p><code>drv-parts</code> requires a clear distinction between known parameters and user-defined variables.
+Defining <code>SOME_VARIABLE</code> at the top-level, would raise:</p>
+<pre tabindex="0"><code>The option `[...].SOME_VARIABLE&#39; does not exist
+</code></pre><p>Instead it has to be defined under <code>env.</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  my-package <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># ...</span>
+</span></span><span style="display:flex;"><span>    env<span style="color:#f92672">.</span>SOME_VARIABLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;example&#34;</span>;
+</span></span><span style="display:flex;"><span>  };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="package-options-documentation">
+  Package options documentation
+  <a class="heading-link" href="#package-options-documentation">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Documentation similar to <a href="https://search.nixos.org">search.nixos.org</a> can be generated for packages declared via <code>drv-parts</code>.</p>
+<p>This is not yet implemented.</p>
+<h2 id="package-blueprints">
+  Package blueprints
+  <a class="heading-link" href="#package-blueprints">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>With <code>drv-parts</code>, packages don&rsquo;t need to be fully declared. Options can be left without defaults, requiring the consumer to complete the definition.</p>
+<p>For example, this can be useful for lang2nix tools, where <code>src</code> and <code>version</code> are dynamically provided by a lock file parser.</p>
+<h2 id="freedom-of-abstraction">
+  Freedom of abstraction
+  <a class="heading-link" href="#freedom-of-abstraction">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The nixos module system gives maintainers more freedom over how packages are split into modules. Separation of concerns can be implemented more easily.
+For example, the dependency tree of a package set can be factored out into a separate module, allowing for simpler modification.</p>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      1993 -
+    
+    2023
+     David Hauer 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>
