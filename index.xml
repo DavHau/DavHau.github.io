@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DavHau - David Hauer</title>
-    <link>https://DavHau.github.io/dump/</link>
+    <link>https://DavHau.com/</link>
     <description>Recent content on DavHau - David Hauer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Feb 2023 18:44:15 +0700</lastBuildDate><atom:link href="https://DavHau.github.io/dump/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Feb 2023 18:44:15 +0700</lastBuildDate><atom:link href="https://DavHau.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>drv-parts</title>
-      <link>https://DavHau.github.io/dump/projects/drv-parts/</link>
+      <link>https://DavHau.com/projects/drv-parts/</link>
       <pubDate>Wed, 22 Feb 2023 18:44:15 +0700</pubDate>
       
-      <guid>https://DavHau.github.io/dump/projects/drv-parts/</guid>
+      <guid>https://DavHau.com/projects/drv-parts/</guid>
       <description>drv-parts Link to heading drv-parts replaces callPackage, override, overrideAttrs, ... as a mechanism for configuring packages.
 It makes package configuration feel like nixos system configuration.
 Benefits Link to heading No more override functions Link to heading Changing options of packages in nixpkgs can require chaining different override functions like this:
