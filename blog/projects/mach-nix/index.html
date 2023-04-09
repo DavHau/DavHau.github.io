@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+  mach-nix · DavHau - David Hauer
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="David Hauer">
+<meta name="description" content="!!! This project is unmaintained. The plan is to replace it with dream2nix. The dream2nix python support is still WIP and needs your help. Please consider to support dream2nix with contributions or funds in order to speed up the process. Feel free to contact me.
+mach-nix - Create highly reproducible python environments Link to heading Mach-nix makes it easy to create and share reproducible python environments or packages. Existing tools for python package management often suffer from reproducibility and complexity issues, requiring a multitude of tools and additional virtualization layers to work sufficiently.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="mach-nix"/>
+<meta name="twitter:description" content="!!! This project is unmaintained. The plan is to replace it with dream2nix. The dream2nix python support is still WIP and needs your help. Please consider to support dream2nix with contributions or funds in order to speed up the process. Feel free to contact me.
+mach-nix - Create highly reproducible python environments Link to heading Mach-nix makes it easy to create and share reproducible python environments or packages. Existing tools for python package management often suffer from reproducibility and complexity issues, requiring a multitude of tools and additional virtualization layers to work sufficiently."/>
+
+<meta property="og:title" content="mach-nix" />
+<meta property="og:description" content="!!! This project is unmaintained. The plan is to replace it with dream2nix. The dream2nix python support is still WIP and needs your help. Please consider to support dream2nix with contributions or funds in order to speed up the process. Feel free to contact me.
+mach-nix - Create highly reproducible python environments Link to heading Mach-nix makes it easy to create and share reproducible python environments or packages. Existing tools for python package management often suffer from reproducibility and complexity issues, requiring a multitude of tools and additional virtualization layers to work sufficiently." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://DavHau.com/projects/mach-nix/" /><meta property="article:section" content="projects" />
+<meta property="article:published_time" content="2023-04-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-04-09T00:00:00+00:00" />
+
+
+
+
+
+<link rel="canonical" href="https://DavHau.com/projects/mach-nix/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.0fa2dc75ed1b76894ac0e062b10a6c4730daa745096fa120114b290ed8a48788.css" integrity="sha256-D6Lcde0bdolKwOBisQpsRzDap0UJb6EgEUspDtikh4g=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.593028e7f7ac55c003b79c230d1cd411bb4ca53b31556c3abb7f027170e646e9.css" integrity="sha256-WTAo5/esVcADt5wjDRzUEbtMpTsxVWw6u38CcXDmRuk=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<meta name="generator" content="Hugo 0.106.0">
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      DavHau - David Hauer
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://DavHau.com/projects/mach-nix/">
+          mach-nix
+        </a>
+      </h1>
+    </header>
+
+    <p>!!! This project is unmaintained. The plan is to replace it with dream2nix. The dream2nix python support is still WIP and needs your help. Please consider to support dream2nix with contributions or funds in order to speed up the process. Feel free to contact me.</p>
+<!-- raw HTML omitted -->
+<h2 id="mach-nix---create-highly-reproducible-python-environments">
+  mach-nix - Create highly reproducible python environments
+  <a class="heading-link" href="#mach-nix---create-highly-reproducible-python-environments">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Mach-nix makes it easy to create and share reproducible python environments or packages. Existing tools for python package management often suffer from reproducibility and complexity issues, requiring a multitude of tools and additional virtualization layers to work sufficiently. Mach-nix aims to solve these problems by providing a simple way to use nix, a revolutionary build system which is known to achieve great reproducibility and portability besides <a href="https://nixos.org/features.html">many other advantages</a>.</p>
+<h2 id="who-is-this-meant-for">
+  Who is this meant for?
+  <a class="heading-link" href="#who-is-this-meant-for">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Users without nix experience, who want to maintain python environments for their projects which are reliable and easy to reproduce.</li>
+<li>Users already working with nix who want to reduce the effort needed to create nix expressions for their python projects.</li>
+</ul>
+<h2 id="other-benefits-of-mach-nix">
+  Other benefits of mach-nix
+  <a class="heading-link" href="#other-benefits-of-mach-nix">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Use one tool to install packages from 3 different universes: pypi, conda, nixpkgs.</li>
+<li>Hardware optimizations, like for example SSE/AVX/FMA for tensorflow, are available without the need to manually mess with their build system. (see <a href="#configure-providers">nixpkgs provider</a>)</li>
+<li>Cross platform support (tested only aarch64)</li>
+<li>Easily include private packages or packages from other sources.</li>
+<li>Build time parameters and dependencies of complex python packages can be tweaked without needing to setup any build environment. It requires some knowledge about nix, though. For examples, see <a href="/examples.md/#simplified-overrides-_-argument">override system</a>.</li>
+</ul>
+<h1 id="table-of-contents">
+  Table of Contents
+  <a class="heading-link" href="#table-of-contents">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h1>
+<!-- raw HTML omitted -->
+<ul>
+<li><a href="#mach-nix---create-highly-reproducible-python-environments">mach-nix - Create highly reproducible python environments</a>
+<ul>
+<li><a href="#who-is-this-meant-for">Who is this meant for?</a></li>
+<li><a href="#other-benefits-of-mach-nix">Other benefits of mach-nix</a></li>
+<li><a href="#donate">Donate</a></li>
+</ul>
+</li>
+<li><a href="#table-of-contents">Table of Contents</a>
+<ul>
+<li><a href="#usage-from-cmdline">Usage from cmdline</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#build-a-virtualenv-style-python-environment-from-a-requirementstxt">Build a virtualenv-style python environment from a requirements.txt</a></li>
+<li><a href="#generate-a-nix-expression-from-a-requirementstxt">Generate a nix expression from a requirements.txt</a></li>
+</ul>
+</li>
+<li><a href="#usage-in-nix-expression">Usage in Nix Expression</a>
+<ul>
+<li><a href="#basic">Basic</a></li>
+<li><a href="#advanced">Advanced</a>
+<ul>
+<li><a href="#required-arguments">Required Arguments:</a></li>
+<li><a href="#optional-arguments">Optional Arguments:</a></li>
+<li><a href="#configure-providers">Configure Providers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#why-nix">Why nix?</a></li>
+<li><a href="#how-does-mach-nix-work">How does mach-nix work?</a>
+<ul>
+<li><a href="#dependency-resolution">Dependency resolution</a></li>
+<li><a href="#file-resolution">File resolution</a></li>
+<li><a href="#generating-a-nix-expression">Generating a nix expression</a></li>
+</ul>
+</li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#alternative--similar-software">Alternative / Similar Software:</a></li>
+</ul>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="usage-from-cmdline">
+  Usage from cmdline
+  <a class="heading-link" href="#usage-from-cmdline">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="installation">
+  Installation
+  <a class="heading-link" href="#installation">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nix-env -if https://github.com/DavHau/mach-nix/tarball/3.5.0 -A mach-nix
+</span></span></code></pre></div><p>or, if you prefer <code>nix-shell</code>:</p>
+<ul>
+<li>
+<p>if <a href="https://nixos.wiki/wiki/Flakes#:~:text=Installing%20flakes">Nix flakes is enabled</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nix shell github:DavHau/mach-nix
+</span></span></code></pre></div></li>
+<li>
+<p>otherwise:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nix-shell -p <span style="color:#e6db74">&#39;(callPackage (fetchTarball https://github.com/DavHau/mach-nix/tarball/3.5.0) {}).mach-nix&#39;</span>
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h3 id="build-a-virtualenv-style-python-environment-from-a-requirementstxt">
+  Build a virtualenv-style python environment from a requirements.txt
+  <a class="heading-link" href="#build-a-virtualenv-style-python-environment-from-a-requirementstxt">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mach-nix env ./env -r requirements.txt
+</span></span></code></pre></div><p>This will generate the python environment into <code>./env</code>. To activate it, execute:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>nix-shell ./env
+</span></span></code></pre></div><p>The <code>./env</code> directory contains a portable and reproducible definition of your python environment. To reuse this environment on another system, just copy the <code>./env</code> directory
+and use <code>nix-shell</code> to activate it.</p>
+<hr>
+<h3 id="generate-a-nix-expression-from-a-requirementstxt">
+  Generate a nix expression from a requirements.txt
+  <a class="heading-link" href="#generate-a-nix-expression-from-a-requirementstxt">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mach-nix gen -r requirements.txt
+</span></span></code></pre></div><p>&hellip;to print out the nix expression which defines a python derivation (optionally use <code>-o</code> to define an <code>output file</code>)</p>
+<hr>
+<h3 id="build-a-derivation-or-enter-a-shell-from-a-list-of-requirements">
+  Build a derivation or enter a shell from a list of requirements
+  <a class="heading-link" href="#build-a-derivation-or-enter-a-shell-from-a-list-of-requirements">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p>if <a href="https://nixos.wiki/wiki/Flakes#:~:text=Installing%20flakes">Nix flakes is enabled</a>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>nix <span style="color:#f92672">(</span>build|shell<span style="color:#f92672">)</span> mach-nix#gen.<span style="color:#f92672">(</span>python|docker<span style="color:#f92672">)</span>.package1.package2...
+</span></span></code></pre></div></li>
+</ul>
+<hr>
+<h2 id="usage-in-nix-expression">
+  Usage in Nix Expression
+  <a class="heading-link" href="#usage-in-nix-expression">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="basic">
+  Basic
+  <a class="heading-link" href="#basic">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>You can call mach-nix directly from a nix expression</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span><span style="color:#66d9ef">let</span>
+</span></span><span style="display:flex;"><span>  mach-nix <span style="color:#f92672">=</span> <span style="color:#f92672">import</span> (builtins<span style="color:#f92672">.</span>fetchGit {
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://github.com/DavHau/mach-nix&#34;</span>;
+</span></span><span style="display:flex;"><span>    ref <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;refs/tags/3.5.0&#34;</span>;
+</span></span><span style="display:flex;"><span>  }) {};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">in</span>
+</span></span><span style="display:flex;"><span>mach-nix<span style="color:#f92672">.</span>mkPython {
+</span></span><span style="display:flex;"><span>  requirements <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    pillow
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    numpy
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    requests
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  &#39;&#39;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>find more examples under <a href="/examples.md">./examples.md</a></p>
+<h3 id="advanced">
+  Advanced
+  <a class="heading-link" href="#advanced">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Mach-nix can be fine tuned with additional arguments. Examples can be found in <a href="/examples.md">./examples.md</a>.</p>
+<p>Functions for building python environments:</p>
+<ol>
+<li><strong>mkPython</strong> - builds a python environment for a given <code>requirements.txt</code>.</li>
+<li><strong>mkPythonShell</strong> - builds a python environment suitable for nix-shell.</li>
+<li><strong>mkDockerImage</strong> - builds a layered docker image containing a python environment.</li>
+<li><strong>mkNixpkgs</strong> - returns nixpkgs which conform to the given requirements.</li>
+<li><strong>mkOverlay</strong> - returns an overlay function to make nixpkgs conform to the given requirements.</li>
+<li><strong>mkPythonOverrides</strong> - produces pythonOverrides to make python conform to the given requirements.</li>
+</ol>
+<p>Functions for building python packages or applications:</p>
+<ol>
+<li><strong>buildPythonPackage</strong> - build a single python package from a source code while automatically detecting requirements.</li>
+<li><strong>buildPythonApplication</strong> - same as <strong>buildPythonPackage</strong>, but package will not be importable by other python packages.</li>
+</ol>
+<p><strong>buildPythonPackage</strong> and <strong>buildPythonApplication</strong> accept the same arguments as their equally named partners in nixpkgs, plus the arguments of <strong>mkPython</strong>. If name/version/requirements arguments are omitted, mach-nix attempts to detect them automatically. See <a href="/examples.md">./examples.md</a>.</p>
+<p><em>Note that some dependency declaration formats are missing. For a roadmap, please refer to issue <a href="https://github.com/DavHau/mach-nix/issues/132">#132</a>.</em></p>
+<p><strong>mkPython</strong> and all other <strong>mk&hellip;</strong> functions take exactly the following arguments:</p>
+<h4 id="required-arguments">
+  Required Arguments:
+  <a class="heading-link" href="#required-arguments">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>requirements</strong> (string): Text content of a typical <code>requirements.txt</code>.</li>
+</ul>
+<h4 id="optional-arguments">
+  Optional Arguments:
+  <a class="heading-link" href="#optional-arguments">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>providers</strong> (set): define provider preferences (see examples below)</li>
+<li><strong>packagesExtra</strong> (list) Add extra packages. Can contain tarball-URLs or paths of python source code, packages built via <code>mach-nix.buildPythonPackage</code>, or R Packages.</li>
+<li><strong>_</strong> (set): use underscore argument to easily modify arbitrary attributes of packages. For example to add build inputs use <code>_.{package}.buildInputs.add = [...]</code>. Or to overwrite patches use <code>_.{package}.patches = [...]</code>.</li>
+<li><strong>overridesPre</strong> (list): (advanced) list of pythonOverrides to apply before the mach-nix overrides. Use this to include additional packages which can then be selected inside the <code>requirements</code></li>
+<li><strong>overridesPost</strong> (list): (advanced) list of pythonOverrides to apply after the mach-nix overrides. Use this to fixup packages.</li>
+<li><strong>tests</strong> (bool): Whether to enable tests (default: false)</li>
+<li><strong>_providerDefaults</strong> (set): builtin provider defaults. Disable them by passing {}</li>
+</ul>
+<h4 id="configure-providers">
+  Configure Providers
+  <a class="heading-link" href="#configure-providers">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p><strong>Providers</strong> allow you to configure the origin for your packages on a granular basis.</p>
+<p>The following providers are available:</p>
+<ol>
+<li><strong>conda</strong>: Provides packages from anaconda.org. Those packages can contain binaries. Some benefits of anaconda are:
+<ul>
+<li>Different build variants for packages</li>
+<li>Provides all system dependencies for packages</li>
+</ul>
+</li>
+<li><strong>wheel</strong>: Provides all linux compatible wheel releases from pypi. If wheels contain binaries, Mach-nix patches them via patchelf to ensure reproducibility. Wheels are very quick to install and work quite reliable.</li>
+<li><strong>sdist</strong>: Provides all setuptools compatible packages from pypi. It still uses nix for building, which allows it to be tweaked in a flexible way. But in some cases problems can occur, if there is not sufficient information available to determine required system depedencies.</li>
+<li><strong>nixpkgs</strong>: Provides packages directly from nixpkgs without modifying their sources. Has only a few versions available, Use this provider if you need to tweak individual build parameters, like <code>SSE/AVX/FMA</code> for tensorflow for example.</li>
+</ol>
+<p>Mach-nix builds environments by mixing packages from all 3 providers. You decide which providers should be preferred for which packages, or which providers shouldn&rsquo;t be used at all.
+The default preferred order of providers is <code>conda</code>, <code>wheel</code>, <code>sdist</code>, <code>nixpkgs</code>.</p>
+<p>Providers can be disabled/enabled/preferred like in the following examples:</p>
+<ul>
+<li>
+<p>A provider specifier like <strong><code>&quot;wheel,sdist,nixpkgs&quot;</code></strong> means, that the resolver will first try to satisfy the requirements with candidates from the wheel provider. If a resolution is impossible or a package doesn&rsquo;t provide a wheel release, it falls back to sdist/nixpkgs for a minimal number of packages. In general it will choose as many packages from wheel as possible, then sdist, then nixpkgs.</p>
+</li>
+<li>
+<p><strong><code>&quot;nixpkgs,sdist&quot;</code></strong> means, that <code>nixpkgs</code> candidates are preferred, but mach-nix falls back to sdist. <strong><code>wheel</code></strong> is not listed and therefore wheels are disabled.</p>
+</li>
+</ul>
+<p>A full provider config passed to mach-nix looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-nix" data-lang="nix"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># The default for all packages which are not specified explicitly</span>
+</span></span><span style="display:flex;"><span>  _default <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;nixpkgs,wheel,sdist&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e"># Explicit settings per package</span>
+</span></span><span style="display:flex;"><span>  numpy <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wheel,sdist&#34;</span>;
+</span></span><span style="display:flex;"><span>  tensorflow <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;wheel&#34;</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Mach-nix will always satisfy the <strong>requirements.txt</strong> fully with the configured providers or fail with a <strong>ResolutionImpossible</strong> error.</p>
+<p>If a mach-nix build fails, most of the time it can be resolved by just switching the provider of a package, which is simple and doesn&rsquo;t require writing a lot of nix code. For some more complex scenarios, checkout the <a href="/examples.md">./examples.md</a>.</p>
+<h2 id="why-nix">
+  Why nix?
+  <a class="heading-link" href="#why-nix">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Usually people rely on multiple layers of different package management tools for building their software environments. These tools are often not well integrated with each other and don&rsquo;t offer strong reproducibility. Example: You are on debian/ubuntu and use APT (layer 1) to install python. Then you use venv (layer 2) to overcome some of your layer 1 limitations (not being able to have multiple versions of the same package installed) and afterwards you are using pip (layer 3) to install python packages. You notice that even after pinning all your requirements, your environment behaves differently on your server or your colleagues machine because their underlying system differs from yours. You start using docker (layer 4) to overcome this problem which adds extra complexity to the whole process and gives you some nasty limitations during development. You need to configure your IDE&rsquo;s docker integration and so on. Despite all the effort you put in, still the problem is not fully solved and from time to time your build pipeline just breaks and you need to fix it manually.</p>
+<p>In contrast to that, the nix package manager provides a from ground up different approach to build software systems. Due to its purely functional approach, nix doesn&rsquo;t require additional layers to make your software reliable. Software environments built with nix are known to be reproducible and portable, which makes many processes during development and deployment easier. Mach-nix leverages that potential by abstracting away the complexity involved in building python environments with nix. Under the hood it just generates and evaluates nix expressions for you.</p>
+<h2 id="how-does-mach-nix-work">
+  How does mach-nix work?
+  <a class="heading-link" href="#how-does-mach-nix-work">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>The general mechanism can be broken down into <a href="#dependency-resolution">Dependency resolution</a> and <a href="#generating-a-nix-expression">Generating a nix expression</a>:</p>
+<h3 id="dependency-resolution">
+  Dependency resolution
+  <a class="heading-link" href="#dependency-resolution">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Mach-nix contains a dependency graph of nearly all python packages available on pypi.org. This allows mach-nix to resolve dependencies offline within seconds.</p>
+<p>The dependency graph data can be found here: <a href="https://github.com/DavHau/pypi-deps-db">https://github.com/DavHau/pypi-deps-db</a>
+The dependency graph is updated on a daily basis by this set of tools: <a href="https://github.com/DavHau/pypi-crawlers">https://github.com/DavHau/pypi-crawlers</a></p>
+<p>Despite this graph being updated constantly, mach-nix always pins one specific version of the graph to ensure reproducibility.</p>
+<p>As core for the resolving resolvelib is used: <a href="https://github.com/sarugaku/resolvelib">https://github.com/sarugaku/resolvelib</a></p>
+<p>Mach-nix supports multiple providers to retrieve python packages from. The user can specify which providers should be preferred. Packages from different providers can be mixed.</p>
+<h3 id="file-resolution">
+  File resolution
+  <a class="heading-link" href="#file-resolution">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>With <code>pypi-deps-db</code>, we have built a dependency graph, where each package is defined by name and version, for example <code>pillow-9.1.0</code>.</p>
+<p>To download a package, we need it&rsquo;s URL and hash. This is where <a href="https://github.com/DavHau/nix-pypi-fetcher-2">nix-pypi-fetcher-2</a> comes in.
+<code>nix-pypi-fetcher-2</code> is another database, which allows us to resolve packages to their URL and hash.</p>
+<p>For details, see <a href="implementation.md">implementation.md</a>.</p>
+<h3 id="generating-a-nix-expression">
+  Generating a nix expression
+  <a class="heading-link" href="#generating-a-nix-expression">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>After all python dependencies and their providers have been determined by the dependency resolver, mach-nix will generate a nix expression defining your python environment.</p>
+<p>Individual python packages are either built by overriding an existing package definition from nixpkgs, or by creating the package from scratch via nixpkgs&rsquo; <code>buildPythonPackage</code>. Which strategy is used depends on the provider of a package and if it is already packaged in nixpkgs.</p>
+<p>Using nixpkgs as a base has the following benefits:</p>
+<ol>
+<li><strong>Non-python Dependencies</strong>:
+Many python packages have non-python dependencies like various C libraries. Mach-nix can resolve those dependencies by taking the build inputs from python package definitions in nixpkgs.</li>
+<li><strong>Special features</strong>:
+Some python packages can be built with special features, like for example SSE/AVX/FMA support in tensorflow. The nixpkgs versions of those python packages often include these features.</li>
+<li><strong>Nix specific fixes</strong>:
+Some python packages might need some additional modification to work with nix. Those are already done in nixpkgs.</li>
+</ol>
+<p>If a package is built by overriding nixpkgs, the following attributes are modified:</p>
+<ul>
+<li><code>src</code>: updated to the required version</li>
+<li><code>name</code>: modified to match the new version</li>
+<li><code>buildInputs</code>: replaced with mach-nix determined python deps</li>
+<li><code>propagatedBuildInputs</code>: non-python deps of old definition + mach-nix determined python deps</li>
+<li><code>doCheck</code>: set to false by default if not specified by user</li>
+<li><code>doInstallCheck</code>: set to false by default if not specified by user</li>
+</ul>
+<h2 id="contributing">
+  Contributing
+  <a class="heading-link" href="#contributing">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>Contributions to this project are welcome in the form of GitHub PRs. If you are planning to make any considerable changes, you should first present your plans in a GitHub issue so it can be discussed.</p>
+<p><a href="https://gitpod.io/#https://github.com/DavHau/mach-nix"><img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod ready-to-code"></a></p>
+<h2 id="limitations">
+  Limitations
+  <a class="heading-link" href="#limitations">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li>Currently mach-nix does not provide any functionality which supports you in publishing python projects, like <a href="https://python-poetry.org/">Poetry</a> does for example.</li>
+</ul>
+<h2 id="alternative--similar-software">
+  Alternative / Similar Software:
+  <a class="heading-link" href="#alternative--similar-software">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<ul>
+<li><a href="https://python-poetry.org/">Poetry</a></li>
+<li><a href="https://github.com/pypa/pipenv">Pipenv</a></li>
+<li><a href="https://github.com/nix-community/poetry2nix">poetry2nix</a></li>
+<li><a href="https://github.com/nix-community/pypi2nix">pypi2nix</a></li>
+</ul>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      1993 -
+    
+    2023
+     David Hauer 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>
