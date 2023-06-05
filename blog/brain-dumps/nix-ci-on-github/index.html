@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+  Nix Ci on Github · DavHau - David Hauer
+</title>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="David Hauer">
+<meta name="description" content="This brain dump is split into two parts.
+The first part is there to remind us of the goals we want to achieve with our CI-system.
+The second part proposes some guidelines that support us in reaching these goals.
+Part 1: Goals Link to heading This is a list of goals that we want to achieve with our CI system.
+The goals are not ordered by priority or any other particular way.">
+<meta name="keywords" content="blog,developer,personal">
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Nix Ci on Github"/>
+<meta name="twitter:description" content="This brain dump is split into two parts.
+The first part is there to remind us of the goals we want to achieve with our CI-system.
+The second part proposes some guidelines that support us in reaching these goals.
+Part 1: Goals Link to heading This is a list of goals that we want to achieve with our CI system.
+The goals are not ordered by priority or any other particular way."/>
+
+<meta property="og:title" content="Nix Ci on Github" />
+<meta property="og:description" content="This brain dump is split into two parts.
+The first part is there to remind us of the goals we want to achieve with our CI-system.
+The second part proposes some guidelines that support us in reaching these goals.
+Part 1: Goals Link to heading This is a list of goals that we want to achieve with our CI system.
+The goals are not ordered by priority or any other particular way." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://DavHau.com/brain-dumps/nix-ci-on-github/" /><meta property="article:section" content="brain-dumps" />
+<meta property="article:published_time" content="2023-06-05T16:43:35+02:00" />
+<meta property="article:modified_time" content="2023-06-05T16:43:35+02:00" />
+
+
+
+
+
+<link rel="canonical" href="https://DavHau.com/brain-dumps/nix-ci-on-github/">
+
+
+<link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.0fa2dc75ed1b76894ac0e062b10a6c4730daa745096fa120114b290ed8a48788.css" integrity="sha256-D6Lcde0bdolKwOBisQpsRzDap0UJb6EgEUspDtikh4g=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.593028e7f7ac55c003b79c230d1cd411bb4ca53b31556c3abb7f027170e646e9.css" integrity="sha256-WTAo5/esVcADt5wjDRzUEbtMpTsxVWw6u38CcXDmRuk=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+<meta name="generator" content="Hugo 0.106.0">
+
+
+
+
+
+  </head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    <a class="navigation-title" href="/">
+      DavHau - David Hauer
+    </a>
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/projects/">Projects</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link" href="/brain-dumps/">Brain Dumps</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container page">
+  <article>
+    <header>
+      <h1 class="title">
+        <a class="title-link" href="https://DavHau.com/brain-dumps/nix-ci-on-github/">
+          Nix Ci on Github
+        </a>
+      </h1>
+    </header>
+
+    <p>This brain dump is split into two parts.</p>
+<p>The first part is there to remind us of the <a href="#part-1-goals"><strong>goals</strong></a> we want to achieve with our CI-system.</p>
+<p>The second part proposes some <a href="#part-2-guidelines"><strong>guidelines</strong></a> that support us in reaching these goals.</p>
+<h2 id="part-1-goals">
+  Part 1: Goals
+  <a class="heading-link" href="#part-1-goals">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<p>This is a list of goals that we want to achieve with our CI system.</p>
+<p>The goals are not ordered by priority or any other particular way.</p>
+<p>If a change brings the system closer towards meeting the described goals, it&rsquo;s a good change.</p>
+<p>If a change moves the system away from these goals, it should be regarded with care. In this case it&rsquo;s a good idea to invest some time thinking about alternatives and discussing the solution with others before implementing it. It&rsquo;s much easier to change an idea before becoming invested in its implementation.</p>
+<h3 id="a-fast-ci-jobs">
+  (a) Fast CI jobs
+  <a class="heading-link" href="#a-fast-ci-jobs">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We want our CI jobs to be as fast as possible, to reduce the time PR authors need to wait until getting a green or red signal.</p>
+<p>The underlying reason is that slow CI generates context switching and slows down the team. Ideally we want the CI to finish in 1 minute for the hot path.</p>
+<h3 id="b-portable-ci-jobs">
+  (b) Portable CI jobs
+  <a class="heading-link" href="#b-portable-ci-jobs">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We want to make it easy to execute the jobs anywhere.</p>
+<p>The jobs should not be tied to github or any other specific cloud environment.</p>
+<p>Developers should be able to just simply execute any job they want on their local machine.</p>
+<p>The underlying reason is that it&rsquo;s generally faster for developers to debug things locally.</p>
+<h3 id="c-reproducible-ci-jobs">
+  (c) Reproducible CI jobs
+  <a class="heading-link" href="#c-reproducible-ci-jobs">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>If a job fails in the CI pipeline, it should also fail when executed on the developers machine.</p>
+<p>If a job succeeds on a developers machine, it should also succeed in the CI pipeline.</p>
+<p>There should not be the necessity to push code to a PR and wait for a workflow to trigger in order to validate ones code.</p>
+<h3 id="d-simple-debugging-of-ci-jobs">
+  (d) Simple debugging of CI jobs
+  <a class="heading-link" href="#d-simple-debugging-of-ci-jobs">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>If a job in the CI pipeline fails, it should be obvious to an observer how to reproduce the failure locally.</p>
+<p>It should, for example, be simple to understand which CI code is responsible for the failed Job and which is not.</p>
+<h3 id="e-simple-contributing--onboarding">
+  (e) Simple contributing / onboarding
+  <a class="heading-link" href="#e-simple-contributing--onboarding">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The CI related code should be structured and documented in a way that makes it simple for previously unfamiliar developers to become productive on it as quickly as possible. It is undesired to have a system which is understood by a single person or team while being a blackbox for others.</p>
+<p>The optimal DevOps scenario is when there is no separate ownership of the CI code to a specific person or team. Instead developers themselves take part in maintaining the parts of the CI pipeline relevant to their concerns.</p>
+<h2 id="part-2-guidelines">
+  Part 2: Guidelines
+  <a class="heading-link" href="#part-2-guidelines">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
+<h3 id="1-no-shell-code-in-github-yml-files">
+  1. No shell code in github yml files
+  <a class="heading-link" href="#1-no-shell-code-in-github-yml-files">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Jobs defined in .yml files should not contain any shell code other than a single line that executes one command.</p>
+<p>Contributes to goals:</p>
+<ul>
+<li>(b) Portable CI jobs</li>
+<li>(c) Reproducible CI jobs</li>
+<li>(d) Simple debugging of CI jobs</li>
+</ul>
+<p>(b) Shell code embedded in github .yml files is not portable to other environments or the local machine. The surrounding yaml introduces additional logic, which the shell becomes dependant on. This extra logic is specific to the single cloud provider github. It is not meant to be executed in other environments.</p>
+<p>(c) Shell code embedded in github .yml files is not reproducible. There is no trivial way to reproduce the environment the script is executed in. The script becomes tied to the specific environment that the cloud CI system offers, for example, github&rsquo;s custom ubuntu distribution.</p>
+<p>(d) Shell code embedded in github .yml files is hard to debug, as there is no quick feedback loop to test changes. To test a change, one must push the change to github and wait for the job to run. Depending on the size of the workflow this can be a matter of several minutes which is far from optimal. Little changes that could be made within minutes on a local script, quickly become a task of several hours.</p>
+<p>The only shell code that should exist inside .yml files is single command executions to call a script or a program that is located somewhere else. These programs should be self contained and should offer good reproducibility. For example, the executed program could be a shell script with a hardcoded PATH or a nix derivation which is executed in the nix sandbox.</p>
+<p>A point could be made for shell code with the sole purpose of interacting with github&rsquo;s environment itself. That code is not portable by definition, therefore factoring it out doesn&rsquo;t make it more portable.<br>
+Though, even then, keeping shell code in .sh files is beneficial, because this allows to run static analysis, like shellcheck, etc.</p>
+<h3 id="2-small-work-units">
+  2. Small work units
+  <a class="heading-link" href="#2-small-work-units">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Larger units of work should be broken up into smaller sized, independent units.</p>
+<p>Contributes to goals:</p>
+<ul>
+<li>(a) Fast CI jobs</li>
+<li>(d) Simple debugging of CI jobs</li>
+<li>(e) Simple contributing / onboarding</li>
+</ul>
+<p>(a) Small units of work potentially make the CI run faster, because work units can be parallelized.</p>
+<p>(b) Small units of work make it simpler to debug a failure. Small units allow to narrow down a problem to a smaller amount of code that is responsible for it. It&rsquo;s much simpler to debug a .yml consisting of 60 lines of code, compared to a yml. consisting of 600 lines of code.</p>
+<p>(c) Small units of work make it simpler to onboard new contributors. If code is organized in large chunks, it requires investing mental capacity to understand what units it actually contains of and how those are related to each other. Especially for new contributors it is better to find these units already separated from the start.</p>
+<p>Heads UP:</p>
+<ul>
+<li>While the DRY pattern is generally a good idea, it can often get in the way of decoupling things into smaller units. Sometimes duplication is necessary in order to decouple things and that&rsquo;s OK.</li>
+<li>Smaller units might increase the total number of code lines in the CI, as previously shared code might need to be duplicated.</li>
+<li>There is a cost of initializing workflow runs, which in summary is increased by introducing more workflows, for example the time to install nix on github hosted runners etc.</li>
+<li>While this change can improve performance, it doesn&rsquo;t necessarily have to. Reducing the mental capacity for maintenance can often we worth more then a few seconds of runtime.</li>
+<li>Be careful with dependencies between work units. Often work units depend on each other and must run in a certain order. In this case, splitting them apart might not make sense.</li>
+</ul>
+<h3 id="3-wrap-all-jobs-with-nix-run-or-nix-build">
+  3. Wrap all jobs with <code>nix run</code> or <code>nix build</code>
+  <a class="heading-link" href="#3-wrap-all-jobs-with-nix-run-or-nix-build">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>All CI jobs should be wrapped by <code>nix run</code> or <code>nix build</code>. This makes it simple to reproduce them locally and execute them in the CI pipeline without any extra glue code.</p>
+<p>Programs executed via <code>nix run</code> should at least be wrapped with a static <code>PATH</code> as done by <code>nix/modules/writers.nix</code>.</p>
+<p>This ensures reasonable reproducibility and allows developers to reproduce failures seen in the CI pipeline locally with ease.</p>
+<p>A typical example of that is the BSD utilities on macOS that don&rsquo;t take the same command-line flags as the GNU coreutils.</p>
+<p>Contributes to Goals:</p>
+<ul>
+<li>(b) Portable CI jobs</li>
+<li>(c) Reproducible CI jobs</li>
+<li>(d) Simple debugging of CI jobs</li>
+</ul>
+<h3 id="4-ci-logic-inside-current-version-of-code">
+  4. CI logic inside current version of code
+  <a class="heading-link" href="#4-ci-logic-inside-current-version-of-code">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Checking out one revision of the repository should not only deliver the project code but also exactly the right version of CI code that is needed to verify the project.</p>
+<p>The CI code should not be spread across different repositories or different revisions of a single repo.</p>
+<p>Under normal circumstances the branch to verify should not be a parameter of the CI code. The CI code should always verify exactly the version that&rsquo;s represented by the current revision of the repository.</p>
+<p>Contributes to Goals:</p>
+<ul>
+<li>(c) Reproducible CI jobs</li>
+<li>(d) Simple debugging of CI jobs</li>
+</ul>
+<p>(c) It makes it hard to reproduce CI pipeline results if a combination of different repositories or a combinations of different revisions is needed to verify the project.</p>
+<p>(d) It becomes harder to debug problems if the state that&rsquo;s needed to reproduce them is a mix of different repositories or revisions.</p>
+<h3 id="5-no-inputs-for-ci-jobs">
+  5. No inputs for CI jobs
+  <a class="heading-link" href="#5-no-inputs-for-ci-jobs">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The CI jobs should not take any user input except for debugging scenarios.</p>
+<p>Contributes to Goals:</p>
+<ul>
+<li>(c) Reproducible CI jobs</li>
+<li>(d) Simple debugging of CI jobs</li>
+</ul>
+<p>(c) It makes it hard to reproduce CI jobs if they take user input, because the input is not persisted in the code.</p>
+<p>(d) It is hard to debug a CI job that takes user input because of the reproducibility problem.</p>
+<p>Everything that is needed to verify a single version of the project should be contained within that single version of the project. If the CI logic requires configuration or arguments, those should be manifested inside the code of the same version of the repository.</p>
+<p>For debugging purposes inputs could be used but requiring them should not be the default.</p>
+<h3 id="6-document-the-code-well">
+  6. Document the code well
+  <a class="heading-link" href="#6-document-the-code-well">
+    <i class="fa fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The CI code should be documented sufficiently well. For every snippet of code the should be a comment on what it does and why it&rsquo;s needed.</p>
+<p>Contributes to Goals:</p>
+<ul>
+<li>(d) Simple debugging of CI jobs</li>
+<li>(e) Simple contributing / onboarding</li>
+</ul>
+
+  </article>
+</section>
+
+  
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      1993 -
+    
+    2023
+     David Hauer 
+    ·
+    
+    Powered by <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+
+</html>

@@ -6,7 +6,20 @@
     <description>Recent content on DavHau - David Hauer</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 09 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://DavHau.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 05 Jun 2023 16:43:35 +0200</lastBuildDate><atom:link href="https://DavHau.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Nix Ci on Github</title>
+      <link>https://DavHau.com/brain-dumps/nix-ci-on-github/</link>
+      <pubDate>Mon, 05 Jun 2023 16:43:35 +0200</pubDate>
+      
+      <guid>https://DavHau.com/brain-dumps/nix-ci-on-github/</guid>
+      <description>This brain dump is split into two parts.
+The first part is there to remind us of the goals we want to achieve with our CI-system.
+The second part proposes some guidelines that support us in reaching these goals.
+Part 1: Goals Link to heading This is a list of goals that we want to achieve with our CI system.
+The goals are not ordered by priority or any other particular way.</description>
+    </item>
+    
     <item>
       <title>dream2nix</title>
       <link>https://DavHau.com/projects/dream2nix/</link>
